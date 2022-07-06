@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+    <link href="main.css" rel="stylesheet" />
+    <title>Facture</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="column">
+        <div class="row">
+          <span>Date:</span>
+        </div>
+        <div class="row">
+          <input type="date" class="invoiceDate"></input>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <br>
+        </div>
+        <div class="row">
+          <button class="btn addDate">Remplir la Date Automatiquement</button>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container">
+      <div class="column">
+        <div class="row">
+          <span>Facture N°:</span>
+        </div>
+        <div class="row">
+          <input class="invoiceNumber" placeholder="Facture N°"></input>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <span>N° Article:</span>
+        </div>
+        <div class="row">
+          <input class="articleNumber" placeholder="N° Article"></input>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container">
+      <div class="column">
+        <div class="row">
+          <span>Doit:</span>
+        </div>
+        <div class="row">
+          <input class="clientName" placeholder="Client"></input>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <span>Lieu:</span>
+        </div>
+        <div class="row">
+          <input class="invoiceLocation" placeholder="Lieu"></input>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container">
+      <div class="column">
+        <div class="row">
+          <span>R.C.N°:</span>
+        </div>
+        <div class="row">
+          <input class="clientRCN" placeholder="Registre de Commerce"></input>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <span>ID Fiscal:</span>
+        </div>
+        <div class="row">
+          <input class="fiscalID" placeholder="ID Fiscal"></input>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container-designations">
+      <div>
+        <div class="row">
+          <span>Designation</span>
+        </div>
+        <div class="row">
+          <input class="designation" placeholder="Designation"></input>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <span>Qte</span>
+        </div>
+        <div class="row">
+          <input class="qte" type="number" placeholder="00" style="margin-left: 0; margin-right: 0;"></input>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <span>Prix</span>
+        </div>
+        <div class="row">
+          <input class="price" type="number" step=".01" placeholder="DZD"></input>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <br>
+        </div>
+        <div class="row">
+          <button class="btn small addBtn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="designations"></div>
+    <div class="row">
+      <div class="column"></div>
+      <div class="column">
+        <br>
+        <button class="btn save">Enregistrer</button>
+      </div>
+    </div>
+  </body>
+  <script src="main.js"></script>
+  <script src="script.js"></script>
+</html>
