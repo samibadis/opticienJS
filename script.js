@@ -65,7 +65,7 @@
     var num2Words = function num2Words(n) {
       var a = [
         "",
-        "une",
+        "un",
         "deux",
         "trois",
         "quatre",
