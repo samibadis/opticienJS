@@ -1,5 +1,4 @@
 ("use strict");
-
 // Convert numbers to written words
 
 (function (root, factory) {
@@ -228,80 +227,82 @@ document.querySelector(".addBtn").addEventListener("click", function () {
 
 // Creates the PDF page to be printed
 
-document.querySelector(".save").addEventListener("click", function name() {
-  let itemsArray = [];
-  let dsg;
-  let qte;
-  let price;
-  let htmlTable = "";
-  let sum = 0;
-  let sumText;
+document
+  .querySelector(".save")
+  .addEventListener("click", async function name() {
+    let itemsArray = [];
+    let dsg;
+    let qte;
+    let price;
+    let htmlTable = "";
+    let sum = 0;
+    let sumText;
 
-  // Get the newly added elements and place them in an array
+    // Get the newly added elements and place them in an array
 
-  for (let index = 1; index <= elements; index++) {
-    if (document.getElementById(index)) {
-      dsg = document.querySelector(`.dsg${index}`).textContent;
-      qte = Number(document.querySelector(`.qte${index}`).textContent);
-      price = Number(document.querySelector(`.price${index}`).textContent);
-      itemsArray.push([dsg, qte, price, qte * price]);
+    for (let index = 1; index <= elements; index++) {
+      if (document.getElementById(index)) {
+        dsg = document.querySelector(`.dsg${index}`).textContent;
+        qte = Number(document.querySelector(`.qte${index}`).textContent);
+        price = Number(document.querySelector(`.price${index}`).textContent);
+        itemsArray.push([dsg, qte, price, qte * price]);
+      }
     }
-  }
 
-  // Create an HTML string of the items to be added to the invoice
+    // Create an HTML string of the items to be added to the invoice
 
-  for (let index = 0; index < itemsArray.length; index++) {
-    htmlTable = htmlTable + "<tr>";
-    htmlTable = htmlTable + "<td>" + (index + 1) + "</td>";
-    htmlTable = htmlTable + "<td>" + titleCase(itemsArray[index][0]) + "</td>";
-    htmlTable = htmlTable + "<td>" + itemsArray[index][1] + "</td>";
-    htmlTable =
-      htmlTable +
-      "<td>" +
-      itemsArray[index][2]
-        .toLocaleString("en-US", {
-          style: "currency",
-          currency: "DZD",
-        })
-        .slice(4) +
-      "</td>";
-    htmlTable =
-      htmlTable +
-      "<td>" +
-      itemsArray[index][3]
-        .toLocaleString("en-US", {
-          style: "currency",
-          currency: "DZD",
-        })
-        .slice(4) +
-      "</td>";
-    htmlTable = htmlTable + "</tr>";
-    sum += itemsArray[index][3];
-  }
+    for (let index = 0; index < itemsArray.length; index++) {
+      htmlTable = htmlTable + "<tr>";
+      htmlTable = htmlTable + "<td>" + (index + 1) + "</td>";
+      htmlTable =
+        htmlTable + "<td>" + titleCase(itemsArray[index][0]) + "</td>";
+      htmlTable = htmlTable + "<td>" + itemsArray[index][1] + "</td>";
+      htmlTable =
+        htmlTable +
+        "<td>" +
+        itemsArray[index][2]
+          .toLocaleString("en-US", {
+            style: "currency",
+            currency: "DZD",
+          })
+          .slice(4) +
+        "</td>";
+      htmlTable =
+        htmlTable +
+        "<td>" +
+        itemsArray[index][3]
+          .toLocaleString("en-US", {
+            style: "currency",
+            currency: "DZD",
+          })
+          .slice(4) +
+        "</td>";
+      htmlTable = htmlTable + "</tr>";
+      sum += itemsArray[index][3];
+    }
 
-  // Creating a string from the total sum of the invoice
+    // Creating a string from the total sum of the invoice
 
-  const dec = Math.floor((sum % 1) * 100);
-  sumText =
-    numToWords(Math.floor(sum)) +
-    "Dinars Algérien et " +
-    ("0" + dec).slice(-2) +
-    " centimes";
+    const dec = Math.floor((sum % 1) * 100);
+    sumText =
+      numToWords(Math.floor(sum)) +
+      " Dinars Algérien et " +
+      ("0" + dec).slice(-2) +
+      " centimes";
 
-  // Creates the final invoice HTML string
+    // Creates the final invoice HTML string
 
-  const htmlStr = ` <!DOCTYPE html>
+    const htmlStr = ` <!DOCTYPE html>
                       <html>
                           <head>
                               <meta charset="utf-8">
-                              <title>Document</title>
+                              <title>Facture ${document
+                                .querySelector(".invoiceNumber")
+                                .value.toUpperCase()}</title>
                               <style type=text/css>
                                   @page { 
                                       size: auto;  
                                       margin: 0mm; 
-                                  }
-                                  body{
-                                      font-family: "Roboto";
                                   }
                                   .topleft { 
                                       float: left; 
@@ -325,17 +326,14 @@ document.querySelector(".save").addEventListener("click", function name() {
                           </head>
                               <body>
                               <div class="top">
-                                  <div class="topright">
+                                  <div class="topleft">
                                       <p>Facture №: ${document
                                         .querySelector(".invoiceNumber")
                                         .value.toUpperCase()}</p>
-                                      <p>A: ${titleCase(
-                                        document.querySelector(
-                                          ".invoiceLocation"
-                                        ).value
-                                      )} le: ${
-    document.querySelector(".invoiceDate").value
-  }</p>
+                                      <p>A: Khenchela le: ${
+                                        document.querySelector(".invoiceDate")
+                                          .value
+                                      }</p>
                                       <p>Doit: ${titleCase(
                                         document.querySelector(".clientName")
                                           .value
@@ -344,23 +342,14 @@ document.querySelector(".save").addEventListener("click", function name() {
                                   <div></div>
                                   <div></div>
                                   <div></div>
-                                  <div class="topleft">
-                                      <p>R.C.№: ${document
-                                        .querySelector(".clientRCN")
-                                        .value.toUpperCase()}</p>
-                                      <p>ID Fiscal: ${document
-                                        .querySelector(".fiscalID")
-                                        .value.toUpperCase()}</p>
-                                      <p>№ Article: ${document
-                                        .querySelector(".articleNumber")
-                                        .value.toUpperCase()}</p>
-                                  </div> 
                               </div>
                               <div></div>
                               <div></div>
                               <div></div>
                               <div class="titre">
-                                  <h1>Facture<h1>
+                                  <h1>Facture ${document
+                                    .querySelector(".invoiceNumber")
+                                    .value.toUpperCase()}<h1>
                               </div>
                               <div class="tableau">
                                   <table>
@@ -395,8 +384,14 @@ document.querySelector(".save").addEventListener("click", function name() {
                           </body>
                       </html>`;
 
-  // prints the final invoice
-  const printWindow = window.open("", "", "height=400,width=800");
-  printWindow.document.write(htmlStr);
-  printWindow.print();
-});
+    // prints the final invoice
+    const printWindow = window.open("", "", "height=400,width=800");
+    printWindow.document.write(htmlStr);
+    html2pdf()
+      .from(htmlStr)
+      .save(
+        `Facture ${document
+          .querySelector(".invoiceNumber")
+          .value.toUpperCase()}.pdf`
+      );
+  });
